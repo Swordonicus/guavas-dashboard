@@ -202,38 +202,38 @@ with tab2:
     with col1:
         max_cpl = st.number_input(
             "Maximum CPL (£)",
-            min_value=10,
-            max_value=200,
+            min_value=10.0,
+            max_value=200.0,
             value=st.session_state.thresholds['max_cpl'],
-            step=5,
+            step=5.0,
             help="Alert when any channel CPL exceeds this amount"
         )
         
         min_conversion = st.number_input(
             "Minimum Lead→Meeting Conversion (%)",
-            min_value=5,
-            max_value=50,
+            min_value=5.0,
+            max_value=50.0,
             value=st.session_state.thresholds['min_conversion_rate'],
-            step=1,
+            step=1.0,
             help="Alert when conversion rate drops below this"
         )
         
         min_weekly_leads = st.number_input(
             "Minimum Weekly Leads",
-            min_value=10,
-            max_value=200,
+            min_value=10.0,
+            max_value=200.0,
             value=st.session_state.thresholds['min_leads_per_week'],
-            step=5,
+            step=5.0,
             help="Alert when weekly leads drop below this number"
         )
     
     with col2:
         partner_inactive_days = st.number_input(
             "Partner Inactive Alert (days)",
-            min_value=30,
-            max_value=180,
+            min_value=30.0,
+            max_value=180.0,
             value=st.session_state.thresholds['partner_inactive_days'],
-            step=10,
+            step=10.0,
             help="Alert when partner has no referrals for this many days"
         )
         
@@ -242,7 +242,7 @@ with tab2:
             min_value=1,
             max_value=14,
             value=st.session_state.thresholds['content_overdue_days'],
-            step=1,
+            step=1.0,
             help="Alert when content is overdue by this many days"
         )
     
@@ -268,43 +268,43 @@ with tab2:
     with col1:
         target_cpl = st.number_input(
             "Target CPL (£)",
-            min_value=10,
-            max_value=100,
+            min_value=10.0,
+            max_value=100.0,
             value=st.session_state.benchmarks['target_cpl'],
-            step=5
+            step=5.0
         )
         
         target_lead_to_meeting = st.number_input(
             "Target Lead→Meeting (%)",
-            min_value=10,
-            max_value=50,
+            min_value=10.0,
+            max_value=50.0,
             value=st.session_state.benchmarks['target_lead_to_meeting'],
-            step=1
+            step=1.0
         )
         
         target_meeting_to_deal = st.number_input(
             "Target Meeting→Deal (%)",
-            min_value=10,
-            max_value=50,
+            min_value=10.0,
+            max_value=50.0,
             value=st.session_state.benchmarks['target_meeting_to_deal'],
-            step=1
+            step=1.0
         )
     
     with col2:
         monthly_lead_goal = st.number_input(
             "Monthly Lead Goal",
-            min_value=50,
-            max_value=500,
+            min_value=50.0,
+            max_value=500.0,
             value=st.session_state.benchmarks['monthly_lead_goal'],
-            step=10
+            step=10.0
         )
         
         monthly_revenue_goal = st.number_input(
             "Monthly Revenue Goal (£)",
-            min_value=100000,
-            max_value=2000000,
+            min_value=100000.0,
+            max_value=2000000.0,
             value=st.session_state.benchmarks['monthly_revenue_goal'],
-            step=50000
+            step=50000.0
         )
     
     # Save benchmarks
