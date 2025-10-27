@@ -325,8 +325,10 @@ with funnel_col:
     st.plotly_chart(funnel_chart, use_container_width=True)
     
     # Conversion rates
-    st.caption(f"Visit→Form: {(form_fills/visitors*100):.1f}%  |  Form→Meet: {(meetings_funnel/form_fills*100):.1f}%  |  Meet→Deal: {(deals_funnel/meetings_funnel*100):.1f}%")
-
+visit_to_form = (form_fills/visitors*100) if visitors > 0 else 0
+form_to_meet = (meetings_funnel/form_fills*100) if form_fills > 0 else 0
+meet_to_deal = (deals_funnel/meetings_funnel*100) if meetings_funnel > 0 else 0
+st.caption(f"Visit→Form: {visit_to_form:.1f}% | Form→Meet: {form_to_meet:.1f}% | Meet→Deal: {meet_to_deal:.1f}%")
 st.markdown("---")
 
 # ========== AI INSIGHTS PANEL ==========
