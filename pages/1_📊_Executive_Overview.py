@@ -146,12 +146,19 @@ with e4:
 
 st.markdown("---")
 
-# ── WEEKLY TREND CHART ─────────────────────────────────────────────────────────
+# ========== WEEKLY TREND CHART ==========
 st.markdown("### 📈 Weekly Lead Trend (Last 12 Weeks)")
 
-if isinstance(weekly_trend, pd.DataFrame) and not weekly_trend.empty and "Week" in weekly_trend.columns:
-    trend_fig = charts.create_kpi_trend_chart(weekly_trend, title="")
-    st.plotly_chart(trend_fig, use_container_width=True)
+# Create trend chart with new accessible colors
+trend_fig = charts.create_kpi_trend_chart(
+    weekly_trend,
+    title="Weekly Lead Trend (Last 12 Weeks)",
+    palette="okabe_ito",   # high-contrast, color-blind-safe
+    fill_opacity=0.55       # tweak transparency if desired (0.4–0.6 works well)
+)
+
+st.plotly_chart(trend_fig, use_container_width=True)
+
 
     t1, t2, t3 = st.columns(3)
 
