@@ -241,7 +241,7 @@ with tab2:
             "Content Overdue Alert (days)",
             min_value=1,
             max_value=14,
-            value=st.session_state.thresholds['content_overdue_days'],
+            value=st.session_state.thresholds.get('content_overdue_days', 7.0)
             step=1.0,
             help="Alert when content is overdue by this many days"
         )
