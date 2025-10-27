@@ -9,7 +9,11 @@ from config import (
     THRESHOLDS, BENCHMARKS
 )
 from utils.data_loader import get_data_loader
-
+# Initialize session state variables
+if 'data_loaded' not in st.session_state:
+    st.session_state.data_loaded = False
+if 'excel_data' not in st.session_state:
+    st.session_state.excel_data = None
 # Load CSS
 load_custom_css()
 
