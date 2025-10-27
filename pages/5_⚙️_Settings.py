@@ -211,7 +211,7 @@ with tab2:
         
         min_conversion = st.number_input(
             "Minimum Lead→Meeting Conversion (%)",
-            min_value=5.0,
+            min_value=0.0,
             max_value=50.0,
             value=st.session_state.thresholds['min_conversion_rate'],
             step=1.0,
