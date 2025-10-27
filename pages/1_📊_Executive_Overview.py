@@ -149,15 +149,46 @@ st.markdown("---")
 # ========== WEEKLY TREND CHART ==========
 st.markdown("### 📈 Weekly Lead Trend (Last 12 Weeks)")
 
-# Create trend chart with new accessible colors
-trend_fig = charts.create_kpi_trend_chart(
-    weekly_trend,
-    title="Weekly Lead Trend (Last 12 Weeks)",
-    palette="okabe_ito",   # high-contrast, color-blind-safe
-    fill_opacity=0.55       # tweak transparency if desired (0.4–0.6 works well)
-)
+if isinstance(weekly_trend, pd.DataFrame) and not weekly_trend.empty and "Week" in weekly_trend.columns:
+    # Create trend chart with new accessible colors
+    trend_fig = charts.create_kpi_trend_chart(
+        weekly_trend,
+        title="Weekly Lead Trend (Last 12 Weeks)",
+        palette="okabe_ito",   # high-contrast, color-blind-safe
+        fill_opacity=0.55,     # tweak transparency if desired (0.4–0.6 works well)
+    )
+    st.plotly_chart(trend_fig, use_container_width=True)
 
-st.plotly_chart(trend_fig, use_container_width=True)
+    t1, t2, t3 = st.columns(3)
+
+    with t1:
+        totals = weekly_trend.drop(columns=["Week"]).sum(axis=1)
+        recent_avg = totals.tail(4).mean() if len(totals) >= 4 else totals.mean()
+        older_avg  = totals.head(4).mean() if len(totals) >= 4 else totals.mean()
+        trend_pct  = calc.calculate_mom_change(recent_avg, older_avg)
+        if trend_pct > 5:
+            st.success(f"📈 **Trending Up**: {trend_pct:+.1f}% vs 8 weeks ago")
+        elif trend_pct < -5:
+            st.error(f"📉 **Trending Down**: {trend_pct:+.1f}% vs 8 weeks ago")
+        else:
+            st.info(f"→ **Stable**: {trend_pct:+.1f}% vs 8 weeks ago")
+
+    with t2:
+        weekly_totals   = totals
+        best_week_leads = int(weekly_totals.max() if not weekly_totals.empty else 0)
+        st.info(f"🏆 **Best Week**: {best_week_leads} leads")
+
+    with t3:
+        std_dev    = weekly_totals.std()  if len(weekly_totals) > 1 else 0
+        mean_leads = weekly_totals.mean() if len(weekly_totals) > 0 else 0
+        consistency = (1 - (std_dev / mean_leads)) * 100 if mean_leads > 0 else 0
+        if consistency > 80:
+            st.success(f"✅ **Consistent**: {consistency:.0f}% stable")
+        else:
+            st.warning(f"⚠️ **Variable**: {consistency:.0f}% consistency")
+else:
+    st.info("Trend data not available yet.")
+
 
 
     t1, t2, t3 = st.columns(3)
