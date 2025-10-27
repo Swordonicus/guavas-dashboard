@@ -232,7 +232,7 @@ with tab2:
             "Partner Inactive Alert (days)",
             min_value=30.0,
             max_value=180.0,
-            value=st.session_state.thresholds['partner_inactive_days'],
+            value=st.session_state.thresholds.get('partner_inactive_days', 60.0)
             step=10.0,
             help="Alert when partner has no referrals for this many days"
         )
