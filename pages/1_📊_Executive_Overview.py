@@ -9,7 +9,9 @@ from utils.data_loader import get_data_loader
 from utils.calculations import get_calculator
 from utils.visualizations import get_chart_builder
 from utils.visualizations import get_chart_builder
-
+# Initialize session state
+from utils.session_state import initialize_session_state
+initialize_session_state()
 # Initialize session state variables
 if 'data_loaded' not in st.session_state:
     st.session_state.data_loaded = False
