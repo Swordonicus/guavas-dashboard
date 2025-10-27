@@ -127,140 +127,70 @@ def configure_page():
     )
 
 # Custom CSS for styling
+import streamlit as st
+
 def load_custom_css():
-    """Load custom CSS for dashboard styling"""
-    st.markdown(f"""
+    st.markdown("""
     <style>
-        /* Main Dashboard Styling */
-        .main {{
-            background-color: {COLORS['grey_100']};
-        }}
-        
-        /* KPI Card Styling */
-        .kpi-card {{
-            background: {COLORS['white']};
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid {COLORS['grey_300']};
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }}
-        
-        .kpi-value {{
-            font-size: 36px;
-            font-weight: 700;
-            color: {COLORS['grey_900']};
-            line-height: 1;
-            margin: 10px 0;
-        }}
-        
-        .kpi-label {{
-            font-size: 14px;
-            color: {COLORS['grey_600']};
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }}
-        
-        .kpi-trend {{
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 8px;
-        }}
-        
-        .trend-up {{
-            color: {COLORS['success']};
-        }}
-        
-        .trend-down {{
-            color: {COLORS['danger']};
-        }}
-        
-        .trend-neutral {{
-            color: {COLORS['grey_600']};
-        }}
-        
-        /* Alert Styling */
-        .alert-warning {{
-            background: {COLORS['warning']};
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-        }}
-        
-        .alert-danger {{
-            background: {COLORS['danger']};
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-        }}
-        
-        .alert-info {{
-            background: {COLORS['info']};
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-        }}
-        
-        /* Button Styling */
-        .stButton > button {{
-            background-color: {COLORS['primary']};
-            color: white;
-            border-radius: 8px;
-            padding: 12px 24px;
-            border: none;
-            font-weight: 600;
-        }}
-        
-        .stButton > button:hover {{
-            background-color: #0052A3;
-        }}
-        
-        /* Metric Cards (Streamlit native) */
-        [data-testid="stMetricValue"] {{
-            font-size: 36px;
-            font-weight: 700;
-        }}
-        
-        /* Hide Streamlit Branding */
-        #MainMenu {{visibility: hidden;}}
-        footer {{visibility: hidden;}}
-        
-        /* Table Styling */
-        .dataframe {{
-            border: 1px solid {COLORS['grey_300']} !important;
-        }}
-        
-        .dataframe thead th {{
-            background-color: {COLORS['grey_100']} !important;
-            font-weight: 600 !important;
-        }}
-        
-        /* Sidebar Styling */
-        [data-testid="stSidebar"] {{
-            background-color: {COLORS['white']};
-        }}
-        
-        /* Header Styling */
-        h1 {{
-            color: {COLORS['grey_900']};
-            font-weight: 700;
-        }}
-        
-        h2 {{
-            color: {COLORS['grey_900']};
-            font-weight: 600;
-        }}
-        
-        h3 {{
-            color: {COLORS['grey_900']};
-            font-weight: 600;
-        }}
+      /* --- Force theme variables (affects sidebar background in some builds) --- */
+      :root,
+      [data-theme="light"],
+      [data-theme="dark"] {
+        --background-color: #0F1116 !important;
+        --secondary-background-color: #111827 !important; /* sidebar/cards */
+        --text-color: #E5E7EB !important;
+      }
+
+      /* --- Sidebar containers (cover both nav + old/new testids) --- */
+      [data-testid="stSidebar"],
+      section[data-testid="stSidebar"],
+      [data-testid="stSidebarNav"],
+      nav[data-testid="stSidebarNav"] {
+        background: linear-gradient(180deg, #0F1116 0%, #111827 60%, #151A22 100%) !important;
+        color: #E5E7EB !important;
+      }
+
+      /* Ensure all text inside sidebar is readable */
+      [data-testid="stSidebar"] *,
+      [data-testid="stSidebarNav"] * {
+        color: #E5E7EB !important;
+      }
+
+      /* Active/hover states for page links */
+      [data-testid="stSidebarNav"] ul li a {
+        color: #E5E7EB !important;
+        border-radius: 10px;
+        padding: 0.5rem 0.75rem;
+        transition: transform .15s ease, background-color .15s ease;
+      }
+      [data-testid="stSidebarNav"] ul li a:hover {
+        background: rgba(255,255,255,.06) !important;
+        transform: translateX(2px);
+      }
+      [data-testid="stSidebarNav"] ul li a[aria-selected="true"] {
+        background: linear-gradient(90deg, #22C55E 0%, #16A34A 100%) !important;
+        color: #0B0F14 !important;
+        font-weight: 600 !important;
+      }
+
+      /* Scrollbar tweaks */
+      [data-testid="stSidebar"] ::-webkit-scrollbar { width: 10px; }
+      [data-testid="stSidebar"] ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 8px; }
+
+      /* If OS switches to light, keep sidebar dark for contrast */
+      @media (prefers-color-scheme: light) {
+        [data-testid="stSidebar"],
+        [data-testid="stSidebarNav"] {
+          background: linear-gradient(180deg, #0F1116 0%, #111827 60%, #151A22 100%) !important;
+        }
+        [data-testid="stSidebar"] *,
+        [data-testid="stSidebarNav"] * {
+          color: #E5E7EB !important;
+        }
+      }
     </style>
     """, unsafe_allow_html=True)
+
 
 # Session State Initialization
 def init_session_state():
