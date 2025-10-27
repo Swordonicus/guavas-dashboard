@@ -16,4 +16,5 @@ def initialize_session_state():
             'max_cpl': 50.0,
             'min_conversion_rate': 2.0,
             'max_response_time': 24.0
+            'min_leads_per_week': 10.0 
         }
