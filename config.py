@@ -10,16 +10,16 @@ DASHBOARD_VERSION = "1.0.0"
 
 # Color Scheme (Guavas Brand Colors)
 COLORS = {
-    'primary': '#0066CC',      # Blue - Links, primary actions
-    'success': '#10B981',      # Green - Positive metrics, wins
-    'warning': '#F59E0B',      # Amber - Attention needed
-    'danger': '#EF4444',       # Red - Critical, overdue, failing
-    'info': '#6366F1',         # Indigo - Informational
-    'grey_900': '#111827',     # Text primary
-    'grey_600': '#4B5563',     # Text secondary
-    'grey_300': '#D1D5DB',     # Borders
-    'grey_100': '#F3F4F6',     # Backgrounds
-    'white': '#FFFFFF'         # Cards, panels
+    'primary': '#FF9786',      # Guavas coral pink - primary brand color
+    'success': '#8FC93A',      # Guavas lime green - positive metrics
+    'warning': '#FF9786',      # Coral for warnings (same as primary)
+    'danger': '#E94B3C',       # Slightly darker red (complements coral)
+    'info': '#FF9786',         # Use coral for info too
+    'grey_900': '#342E37',     # Guavas dark charcoal - text/headers
+    'grey_600': '#5C5560',     # Lighter version of charcoal
+    'grey_300': '#D1D5DB',     # Keep existing for borders
+    'grey_100': '#FBFBFB',     # Guavas off-white - backgrounds
+    'white': '#FBFBFB'         # Use off-white instead of pure white
 }
 
 # Status Colors
