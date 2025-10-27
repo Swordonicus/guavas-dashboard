@@ -9,6 +9,9 @@ from config import (
     THRESHOLDS, BENCHMARKS
 )
 from utils.data_loader import get_data_loader
+# Initialize session state
+from utils.session_state import initialize_session_state
+initialize_session_state()
 # Initialize session state variables
 if 'data_loaded' not in st.session_state:
     st.session_state.data_loaded = False
