@@ -9,6 +9,11 @@ from config import load_custom_css, COLORS, INDUSTRY_BENCHMARKS, PRIORITY_0_CHAN
 from utils.data_loader import get_data_loader
 from utils.calculations import get_calculator
 from utils.visualizations import get_chart_builder
+# Initialize session state variables
+if 'data_loaded' not in st.session_state:
+    st.session_state.data_loaded = False
+if 'excel_data' not in st.session_state:
+    st.session_state.excel_data = None
 
 # Load CSS
 load_custom_css()
